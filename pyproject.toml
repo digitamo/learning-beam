@@ -1,0 +1,34 @@
+[project]
+name = "learning-beam"
+version = "0.1.0"
+description = "Learn Apache Beam with Python SDK"
+requires-python = ">=3.12"
+dependencies = [
+    "apache-beam>=2.71.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=9.0.0",
+    "debugpy>=1.8.0",
+    "ruff>=0.15.0",
+    "pynvim>=0.6.0",
+]
+
+[tool.poetry]
+name = "learning-beam"
+version = "0.1.0"
+description = "Learn Apache Beam with Python SDK"
+authors = ["you"]
+package-mode = false
+
+[tool.poetry.dependencies]
+python = "^3.12"
+apache-beam = "^2.71.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^9.0.0"
+debugpy = "^1.8.0"
+ruff = "^0.15.0"
+pynvim = "^0.6.0"
+pyright = "^1.1.408"
