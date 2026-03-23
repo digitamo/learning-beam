@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Learn Apache Beam with Python SDK"
 requires-python = ">=3.12"
 dependencies = [
-    "apache-beam[tfrecord] (>=2.71.0,<3.0.0)",
+    "apache-beam[tfrecord, gcp] (>=2.71.0,<3.0.0)",
 ]
 
 [project.optional-dependencies]
