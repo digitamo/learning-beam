@@ -1,59 +1,57 @@
 # Learning Apache Beam
 
-This project is set up to learn Apache Beam with the Python SDK.
-
-## Quick Start
-
-1. **Activate the virtual environment**:
-   ```bash
-   pyenv local learning-beam
-   source $(pyenv virtualenv-prefix learning-beam)/bin/activate
-   ```
-
-2. **Run the wordcount example**:
-   ```bash
-   python src/pipelines/wordcount.py data/sample.txt data/output
-   ```
-
-3. **Run tests**:
-   ```bash
-   pytest tests/
-   ```
+Learning Apache Beam through Python SDK and Scala/Scio implementations of the same pipelines.
 
 ## Project Structure
 
 ```
 learning-beam/
-├── src/pipelines/      # Your Beam pipelines
-├── data/               # Sample data files
-├── tests/              # Unit tests
-└── pyproject.toml      # Project config
+├── python/                 # Python SDK pipelines
+│   ├── src/pipelines/      # Pipeline implementations
+│   ├── tests/              # Unit tests
+│   └── pyproject.toml      # Poetry config
+├── scala/                  # Scala/Scio pipelines
+│   ├── src/main/scala/     # Scio implementations
+│   └── build.sbt           # sbt config
+└── data/                   # Shared sample data
 ```
 
-## Running Pipelines
+## Python
 
-### Direct Runner (local)
+### Setup
+
 ```bash
-python src/pipelines/wordcount.py input.txt output.txt --runner=DirectRunner
+pyenv local learning-beam
+source $(pyenv virtualenv-prefix learning-beam)/bin/activate
 ```
 
-### With options
+### Running pipelines
+
 ```bash
-python src/pipelines/wordcount.py input.txt output.txt \
-    --runner=DirectRunner \
-    --direct_num_workers=2
+cd python
+python src/pipelines/wordcount.py ../data/sample.txt ../data/output
 ```
 
-## LazyVim Setup
+### Tests
 
-The following extras are enabled:
-- **lang.python**: Python LSP support (pyright + ruff)
-- **dap.core**: Debugging support (debugpy)
-- **test.core**: Test runner support (pytest)
+```bash
+cd python
+pytest tests/
+```
 
-Keybindings:
-- `<leader>dPt` - Debug test method
-- `<leader>dPc` - Debug test class
-- `<leader>cv` - Select virtual environment
+## Scala / Scio
 
-For debugging, ensure you're using the correct Python path in your project.
+### Running
+
+```bash
+cd scala
+sbt "runMain learning.beam.BeamIntro"
+```
+
+This runs all beam-intro examples (filters, side inputs, Magnolify Cats demo) using the DirectRunner.
+
+### Dependencies
+
+- [Scio](https://spotify.github.io/scio/) 0.14.8 (Spotify's Scala API for Apache Beam)
+- [Magnolify](https://github.com/spotify/magnolify) 0.7.4 (type class derivation for case classes)
+- Apache Beam 2.59.0 (DirectRunner)
